@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nithin Linkedin Database</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+<!-- 🔐 LOGIN -->
+<div id="loginSection" class="login-container">
+  <div class="login-box">
+    <h3>Login</h3>
+    <input id="email" placeholder="Email"/>
+    <input id="password" type="password" placeholder="Password"/>
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<!-- ✅ APP -->
+<div id="appSection" style="display:none;">
+  <div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand"><h1><i class="fas fa-rocket"></i> Nithin.s</h1> </div>
+
+      <div class="profile">
+        <h2 class="name">Linkedin DB</h2>
+      </div>
+
+      <!-- FORM -->
+      <form class="form-section" id="candidateForm">
+        <input id="name" placeholder="Name"/>
+        <input id="emailInput" placeholder="Email"/>
+        <input id="phone" placeholder="Phone"/>
+        <input id="position" placeholder="Position"/>
+        <input id="exp" type="number" placeholder="Experience"/>
+        <input id="currentCTC" type="number" placeholder="Current CTC"/>
+        <input id="expectedCTC" type="number" placeholder="Expected CTC"/>
+        <input id="noticePeriod" placeholder="Notice Period"/>
+
+        <select id="status">
+          <option value="">Status</option>
+          <option>Submitted</option>
+          <option>Shortlisted</option>
+          <option>Rejected</option>
+        </select>
+
+        <button type="submit">Add Candidate</button>
+      </form>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <div class="topbar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search" placeholder="Search candidates..."/>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <h3>Candidates List</h3>
+
+          <div class="filters">
+            <select id="positionFilter"></select>
+            <select id="expFilter"></select>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Si.No</th>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Position</th>
+              <th>Experience</th>
+              <th>Cur CTC</th>
+              <th>Exp CTC</th>
+              <th>N.P</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

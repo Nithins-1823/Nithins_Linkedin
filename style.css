@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: #f4f7fa;
+}
+
+/* LOGIN */
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.login-box input,
+.login-box button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+/* LAYOUT */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: white;
+  border-right: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.brand {
+  font-weight: 600;
+  color: #4f46e5;
+  margin-bottom: 10px;
+}
+
+.profile {
+  margin-bottom: 10px;
+}
+
+/* FORM */
+.form-section {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #4f46e5;
+}
+.form-section input,
+.form-section select,
+.form-section button {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.form-section button {
+  background: green;
+  color: white;
+  border: none;
+}
+
+/* LOGOUT */
+.logout-btn {
+  margin-top: auto;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* SEARCH */
+.topbar input {
+  padding: 10px;
+  width: 300px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* TABLE */
+.table-container {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 1px solid black;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  
+}
+
+.filters select {
+  margin-left: 10px;
+  padding: 6px;
+}
+
+table {
+  width: 100%;
+  border: 1px;
+  border-collapse: collapse;
+
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  border: 1px solid black;
+}
+th{
+  padding: 10px;
+}
+
+tbody tr:hover {
+  background:beige;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .topbar input {
+    width: 100%;
+  }
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.delete-btn i {
+  pointer-events: none;
+}
