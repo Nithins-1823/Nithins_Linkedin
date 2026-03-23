@@ -1,109 +1,217 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nithin Linkedin Database</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nithin LinkedIn Database</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-  
-
-  <link rel="stylesheet" href="style.css"/>
-</head>
-
-<body>
-
-<!-- 🔐 LOGIN -->
-<div id="loginSection" class="login-container">
-  <div class="login-box">
-    <h3>Login</h3>
-    <input id="email" placeholder="Email"/>
-    <input id="password" type="password" placeholder="Password"/>
-    <button onclick="login()">Login</button>
-  </div>
-</div>
-
-<!-- ✅ APP -->
-<div id="appSection" style="display:none;">
-  <div class="container">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="brand"><h1><i class="fas fa-rocket"></i> Nithin.s</h1> </div>
-
-      <div class="profile">
-        <h2 class="name">Linkedin DB</h2>
+  <body>
+    <div id="loginSection" class="login-container">
+      <div class="login-box">
+        <div class="brand" style="justify-content: center; margin-bottom: 20px">
+          <i class="fas fa-rocket"></i> Nithin.s
+        </div>
+        <h3>Welcome Back</h3>
+        <input id="email" placeholder="Email Address" />
+        <input id="password" type="password" placeholder="Password" />
+        <button onclick="login()">Sign In</button>
       </div>
+    </div>
 
-      <!-- FORM -->
-      <form class="form-section" id="candidateForm">
-        <input id="name" placeholder="Name"/>
-        <input id="emailInput" placeholder="Email"/>
-        <input id="phone" placeholder="Phone"/>
-        <input id="position" placeholder="Position"/>
-        <input id="exp" type="text" placeholder="Experience"/>
-        <input id="currentCTC" type="number" placeholder="Current CTC"/>
-        <input id="expectedCTC" type="number" placeholder="Expected CTC"/>
-        <input id="noticePeriod" placeholder="Notice Period"/>
+    <div id="appSection" style="display: none">
+      <div class="container">
+        <main class="main">
+          <div class="topbar">
+            <div class="brand">
+              <i class="fas fa-rocket"></i>
+              <span
+                >Nithin.s
+                <p>Linkedin Database</p></span
+              >
+            </div>
 
-        <select id="status">
-          <option value="">Status</option>
+            <div class="search-wrapper">
+              <i class="fas fa-search"></i>
+              <input
+                type="text"
+                id="search"
+                placeholder="Search by name,target-company, or position..."
+              />
+            </div>
+
+            <button class="logout-btn" onclick="logout()">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </div>
+
+          <section class="form-card">
+            <h4 style="margin-bottom: 15px">Add New Candidate</h4>
+            <form id="candidateForm" class="form-grid">
+              <input id="name" placeholder="Full Name" />
+              <input id="emailInput" placeholder="Email" />
+              <input id="phone" placeholder="Phone" />
+              <input id="position" placeholder="Position" />
+              <input id="exp" type="number" placeholder="Exp (Yrs)" />
+              <input id="currentCTC" type="number" placeholder="Cur CTC" />
+              <input id="expectedCTC" type="number" placeholder="Exp CTC" />
+              <input id="noticePeriod" placeholder="Notice Period" />
+              <input id="location" placeholder="Location" />
+              <input id="currentCompany" placeholder="Current Company" />
+              <input id="targetCompany" placeholder="Target Company" />
+              <select id="status">
+                <option value="">Set Status</option>
+                <option>Not Selected</option>
+                <option>Submitted</option>
+                <option>Shortlisted</option>
+                <option>Rejected</option>
+              </select>
+              <input
+                id="comment"
+                placeholder="Comment/Notes"
+                style="grid-column: span 1"
+              />
+              <button type="submit"><i class="fas fa-plus"></i> Add</button>
+            </form>
+          </section>
+
+          <div class="table-card">
+            <div class="table-header">
+              <h3 style="font-size: 1.1rem">Candidate Database</h3>
+              <div class="filters">
+                <select
+                  id="positionFilter"
+                  style="
+                    padding: 8px;
+                    border-radius: 6px;
+                    border: 1px solid var(--border);
+                  "
+                ></select>
+                <select
+                  id="expFilter"
+                  style="
+                    padding: 8px;
+                    border-radius: 6px;
+                    border: 1px solid var(--border);
+                  "
+                ></select>
+              </div>
+            </div>
+
+            <div class="table-scroll-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Action</th>
+
+                    <th>Si.No</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Position</th>
+                    <th>Exp</th>
+                    <th>Cur CTC</th>
+                    <th>Exp CTC</th>
+                    <th>N.P</th>
+                    <th>Location</th>
+                    <th>Current Company</th>
+                    <th>Target Company</th>
+                    <th>Coments</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+<!-- EDIT MODAL -->
+
+    <div id="editModal" class="modal" style="display: none">
+  <div class="modal-content">
+    <h3 style="margin-bottom: 10px">Edit Candidate Details</h3>
+    <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 20px;" />
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input id="editName" placeholder="Name" />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input id="editEmail" placeholder="Email" />
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input id="editPhone" placeholder="Phone" />
+      </div>
+      <div class="form-group">
+        <label>Job Position</label>
+        <input id="editPosition" placeholder="Position" />
+      </div>
+      <div class="form-group">
+        <label>Experience (Yrs)</label>
+        <input id="editExp" type="number" placeholder="Experience" />
+      </div>
+      <div class="form-group">
+        <label>Current CTC</label>
+        <input id="editCurrentCTC" type="number" placeholder="Current CTC" />
+      </div>
+      <div class="form-group">
+        <label>Expected CTC</label>
+        <input id="editExpectedCTC" type="number" placeholder="Expected CTC" />
+      </div>
+      <div class="form-group">
+        <label>Notice Period</label>
+        <input id="editNoticePeriod" placeholder="Notice Period" />
+      </div>
+      <div class="form-group">
+        <label>Location</label>
+        <input id="editLocation" placeholder="Location" />
+      </div>
+      <div class="form-group">
+        <label>Current Company</label>
+        <input id="editCurrentCompany" placeholder="Current Company" />
+      </div>
+      <div class="form-group">
+        <label>Target Company</label>
+        <input id="editTargetCompany" placeholder="Target Company" />
+      </div>
+      <div class="form-group">
+        <label>Candidate Status</label>
+        <select id="editStatus">
           <option>Not Selected</option>
           <option>Submitted</option>
           <option>Shortlisted</option>
           <option>Rejected</option>
         </select>
-
-        <button type="submit">Add Candidate</button>
-      </form>
-
-      <button class="logout-btn" onclick="logout()">Logout</button>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-
-      <div class="topbar">
-        <i class="fas fa-search"></i>
-        <input type="text" id="search" placeholder="Search candidates..."/>
       </div>
-
-      <div class="table-container">
-        <div class="table-header">
-          <h3>Candidates List</h3>
-
-          <div class="filters">
-            <select id="positionFilter"></select>
-            <select id="expFilter"></select>
-          </div>
-        </div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Si.No</th>
-              <th>Date</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Position</th>
-              <th>Experience</th>
-              <th>Cur CTC</th>
-              <th>Exp CTC</th>
-              <th>N.P</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
+      <div class="form-group" style="grid-column: span 2">
+        <label>Comments / Notes</label>
+        <input id="editComment" placeholder="Comment" />
       </div>
+    </div>
 
-    </main>
+    <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+      <button onclick="closeModal()" class="cancel-btn">Cancel</button>
+      <button onclick="saveEdit()" class="save-btn">Save Changes</button>
+    </div>
   </div>
 </div>
 
-<script type="module" src="app.js"></script>
-</body>
+    <script type="module" src="app.js"></script>
+  </body>
 </html>
