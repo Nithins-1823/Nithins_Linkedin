@@ -12,6 +12,7 @@ import {
   collection,
   addDoc,
   deleteDoc,
+  updateDoc,
   doc,
   serverTimestamp,
   onSnapshot,
@@ -101,6 +102,10 @@ document
       currentCTC: document.getElementById("currentCTC").value || "",
       expectedCTC: document.getElementById("expectedCTC").value || "",
       noticePeriod: document.getElementById("noticePeriod").value.trim(),
+      location: document.getElementById("location").value.trim(),
+      currentCompany: document.getElementById("currentCompany").value.trim(),
+      targetCompany: document.getElementById("targetCompany").value.trim(),
+      comment: document.getElementById("comment").value.trim(),
       status: document.getElementById("status").value,
       createdAt: serverTimestamp(),
     };
@@ -160,9 +165,10 @@ function applyFilters() {
 
   if (expRange) {
     const [min, max] = expRange.split("-").map(Number);
-    filtered = filtered.filter(
-      (c) => Number(c.exp) >= min && Number(c.exp) <= max,
-    );
+    filtered = filtered.filter((c) => {
+      const exp = Number(c.exp);
+      return !isNaN(exp) && exp >= min && exp <= max;
+    });
   }
 
   if (search) {
@@ -177,36 +183,57 @@ function applyFilters() {
   renderTable(filtered);
 }
 
-// 🖥️ TABLE
 function renderTable(list) {
   const table = document.getElementById("tableBody");
   table.innerHTML = "";
+
+  const fields = [
+    "name",
+    "email",
+    "phone",
+    "position",
+    "exp",
+    "currentCTC",
+    "expectedCTC",
+    "noticePeriod",
+    "location",
+    "currentCompany",
+    "targetCompany",
+    "comment",
+    "status",
+  ];
 
   list.forEach((c, i) => {
     const date = c.createdAt?.seconds
       ? new Date(c.createdAt.seconds * 1000).toLocaleString()
       : "";
 
-    table.innerHTML += `
+    // 1. Start the row
+    // 2. Add the Action Buttons in the FIRST column
+    let row = `
       <tr>
+        <td>
+          <div style="display: flex; gap: 5px; align-items: center;">
+            <button class="action-btn edit-btn" onclick="openEdit('${c.id}')">Edit
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="action-btn delete-btn" onclick="deleteCandidate('${c.id}')">Delete
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </td>
         <td>${i + 1}</td>
         <td>${date}</td>
-        <td>${c.name}</td>
-        <td>${c.email}</td>
-        <td>${c.phone}</td>
-        <td>${c.position}</td>
-        <td>${c.exp}</td>
-        <td>${c.currentCTC}</td>
-        <td>${c.expectedCTC}</td>
-        <td>${c.noticePeriod}</td>
-        <td>${c.status}</td>
-        <td>
-        <button class="delete-btn" onclick="deleteCandidate('${c.id}')">Delete
-  <i class="fas fa-trash"></i>
-</button>
-  </td>
-      </tr>
     `;
+
+    // 3. Add dynamic data fields
+    fields.forEach((field) => {
+      row += `<td>${c[field] || "-"}</td>`;
+    });
+
+    row += `</tr>`;
+
+    table.innerHTML += row;
   });
 }
 
@@ -221,3 +248,67 @@ document
   .addEventListener("change", applyFilters);
 document.getElementById("expFilter").addEventListener("change", applyFilters);
 document.getElementById("search").addEventListener("input", applyFilters);
+
+// //////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////
+let currentEditId = null;
+
+window.openEdit = function (id) {
+  const c = allCandidates.find((x) => x.id === id);
+  if (!c) return;
+
+  currentEditId = id;
+
+  // Set values in modal
+  document.getElementById("editName").value = c.name || "";
+  document.getElementById("editEmail").value = c.email || "";
+  document.getElementById("editPhone").value = c.phone || "";
+  document.getElementById("editPosition").value = c.position || "";
+  document.getElementById("editExp").value = c.exp || "";
+  
+  // Fill the 3 missing fields
+  document.getElementById("editCurrentCTC").value = c.currentCTC || "";
+  document.getElementById("editExpectedCTC").value = c.expectedCTC || "";
+  document.getElementById("editNoticePeriod").value = c.noticePeriod || "";
+
+  document.getElementById("editLocation").value = c.location || "";
+  document.getElementById("editCurrentCompany").value = c.currentCompany || "";
+  document.getElementById("editTargetCompany").value = c.targetCompany || "";
+  document.getElementById("editComment").value = c.comment || "";
+  document.getElementById("editStatus").value = c.status || "";
+
+  document.getElementById("editModal").style.display = "flex"; // Changed to flex for centering
+};
+
+window.saveEdit = async function () {
+  const updated = {
+    name: document.getElementById("editName").value,
+    email: document.getElementById("editEmail").value,
+    phone: document.getElementById("editPhone").value,
+    position: document.getElementById("editPosition").value,
+    exp: document.getElementById("editExp").value,
+    
+    // Save the 3 missing fields
+    currentCTC: document.getElementById("editCurrentCTC").value,
+    expectedCTC: document.getElementById("editExpectedCTC").value,
+    noticePeriod: document.getElementById("editNoticePeriod").value,
+
+    location: document.getElementById("editLocation").value,
+    currentCompany: document.getElementById("editCurrentCompany").value,
+    targetCompany: document.getElementById("editTargetCompany").value,
+    comment: document.getElementById("editComment").value,
+    status: document.getElementById("editStatus").value,
+  };
+
+  try {
+    await updateDoc(doc(db, "candidates", currentEditId), updated);
+    closeModal();
+  } catch (error) {
+    console.error("Error updating document: ", error);
+    alert("Failed to save changes.");
+  }
+};
+
+window.closeModal = function () {
+  document.getElementById("editModal").style.display = "none";
+};
