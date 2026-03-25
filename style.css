@@ -365,3 +365,159 @@ tr:hover {
   background: #fecaca;
   border-color: #fca5a5;
 }
+
+
+/* //////////////////////////////////////// */
+
+/* NEW RESUME BUTTON STYLES */
+.view-btn {
+  background: #e0f2fe; 
+  color: #0284c7; 
+  border: 1px solid #bae6fd;
+}
+
+.view-btn:hover {
+  background: #bae6fd;
+  border-color: #7dd3fc;
+}
+
+.action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+/* NEW RESUME MODAL STYLES */
+.resume-modal-content {
+  max-width: 900px;
+  width: 95%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resume-iframe {
+  flex: 1;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.filter-select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+
+
+/* VIEW RESUME BUTTON */
+.view-btn {
+  background: #e0f2fe; 
+  color: #0284c7; 
+  border: 1px solid #bae6fd;
+}
+
+.view-btn:hover {
+  background: #bae6fd;
+  border-color: #7dd3fc;
+}
+
+.action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+/* RESUME MODAL STYLES */
+.resume-modal-content {
+  max-width: 900px;
+  width: 95%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resume-iframe {
+  flex: 1;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.filter-select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+
+/* VIEW RESUME BUTTON */
+.view-btn {
+  background: #e0f2fe; 
+  color: #0284c7; 
+  border: 1px solid #bae6fd;
+}
+
+.view-btn:hover {
+  background: #bae6fd;
+  border-color: #7dd3fc;
+}
+
+.action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+/* RESUME MODAL STYLES */
+.resume-modal-content {
+  max-width: 900px;
+  width: 95%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resume-iframe {
+  flex: 1;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.filter-select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
