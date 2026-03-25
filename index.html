@@ -24,7 +24,7 @@
         <h3>Welcome Back</h3>
         <input id="email" placeholder="Email Address" />
         <input id="password" type="password" placeholder="Password" />
-        <button onclick="login()">Sign In</button>
+        <button id="loginBtn" onclick="login()">Sign In</button>
       </div>
     </div>
 
@@ -34,10 +34,7 @@
           <div class="topbar">
             <div class="brand">
               <i class="fas fa-rocket"></i>
-              <span
-                >Nithin.s
-                <p>Linkedin Database</p></span
-              >
+              <span>Nithin.s<p>Linkedin Database</p></span>
             </div>
 
             <div class="search-wrapper">
@@ -45,7 +42,7 @@
               <input
                 type="text"
                 id="search"
-                placeholder="Search by name,target-company, or position..."
+                placeholder="Search by name, target-company, or position..."
               />
             </div>
 
@@ -57,9 +54,9 @@
           <section class="form-card">
             <h4 style="margin-bottom: 15px">Add New Candidate</h4>
             <form id="candidateForm" class="form-grid">
-              <input id="name" placeholder="Full Name" />
-              <input id="emailInput" placeholder="Email" />
-              <input id="phone" placeholder="Phone" />
+              <input id="name" placeholder="Full Name" required />
+              <input id="emailInput" type="email" placeholder="Email" required />
+              <input id="phone" placeholder="Phone" required />
               <input id="position" placeholder="Position" />
               <input id="exp" type="number" placeholder="Exp (Yrs)" />
               <input id="currentCTC" type="number" placeholder="Cur CTC" />
@@ -75,12 +72,17 @@
                 <option>Shortlisted</option>
                 <option>Rejected</option>
               </select>
+              <input 
+                id="resumeLink" 
+                type="url" 
+                placeholder="Paste OneDrive/Drive Link Here" 
+              />
               <input
                 id="comment"
                 placeholder="Comment/Notes"
                 style="grid-column: span 1"
               />
-              <button type="submit"><i class="fas fa-plus"></i> Add</button>
+              <button type="submit" id="addBtn"><i class="fas fa-plus"></i> Add</button>
             </form>
           </section>
 
@@ -88,22 +90,8 @@
             <div class="table-header">
               <h3 style="font-size: 1.1rem">Candidate Database</h3>
               <div class="filters">
-                <select
-                  id="positionFilter"
-                  style="
-                    padding: 8px;
-                    border-radius: 6px;
-                    border: 1px solid var(--border);
-                  "
-                ></select>
-                <select
-                  id="expFilter"
-                  style="
-                    padding: 8px;
-                    border-radius: 6px;
-                    border: 1px solid var(--border);
-                  "
-                ></select>
+                <select id="positionFilter" class="filter-select"></select>
+                <select id="expFilter" class="filter-select"></select>
               </div>
             </div>
 
@@ -112,7 +100,6 @@
                 <thead>
                   <tr>
                     <th>Action</th>
-
                     <th>Si.No</th>
                     <th>Date</th>
                     <th>Name</th>
@@ -126,7 +113,7 @@
                     <th>Location</th>
                     <th>Current Company</th>
                     <th>Target Company</th>
-                    <th>Coments</th>
+                    <th>Comments</th>
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -138,79 +125,64 @@
       </div>
     </div>
 
-<!-- EDIT MODAL -->
-
     <div id="editModal" class="modal" style="display: none">
-  <div class="modal-content">
-    <h3 style="margin-bottom: 10px">Edit Candidate Details</h3>
-    <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 20px;" />
+      <div class="modal-content">
+        <h3 style="margin-bottom: 10px">Edit Candidate Details</h3>
+        <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 20px;" />
 
-    <div class="form-grid">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input id="editName" placeholder="Name" />
-      </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input id="editEmail" placeholder="Email" />
-      </div>
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input id="editPhone" placeholder="Phone" />
-      </div>
-      <div class="form-group">
-        <label>Job Position</label>
-        <input id="editPosition" placeholder="Position" />
-      </div>
-      <div class="form-group">
-        <label>Experience (Yrs)</label>
-        <input id="editExp" type="number" placeholder="Experience" />
-      </div>
-      <div class="form-group">
-        <label>Current CTC</label>
-        <input id="editCurrentCTC" type="number" placeholder="Current CTC" />
-      </div>
-      <div class="form-group">
-        <label>Expected CTC</label>
-        <input id="editExpectedCTC" type="number" placeholder="Expected CTC" />
-      </div>
-      <div class="form-group">
-        <label>Notice Period</label>
-        <input id="editNoticePeriod" placeholder="Notice Period" />
-      </div>
-      <div class="form-group">
-        <label>Location</label>
-        <input id="editLocation" placeholder="Location" />
-      </div>
-      <div class="form-group">
-        <label>Current Company</label>
-        <input id="editCurrentCompany" placeholder="Current Company" />
-      </div>
-      <div class="form-group">
-        <label>Target Company</label>
-        <input id="editTargetCompany" placeholder="Target Company" />
-      </div>
-      <div class="form-group">
-        <label>Candidate Status</label>
-        <select id="editStatus">
-          <option>Not Selected</option>
-          <option>Submitted</option>
-          <option>Shortlisted</option>
-          <option>Rejected</option>
-        </select>
-      </div>
-      <div class="form-group" style="grid-column: span 2">
-        <label>Comments / Notes</label>
-        <input id="editComment" placeholder="Comment" />
+        <div class="form-grid">
+          <div class="form-group"><label>Full Name</label><input id="editName" /></div>
+          <div class="form-group"><label>Email Address</label><input id="editEmail" /></div>
+          <div class="form-group"><label>Phone Number</label><input id="editPhone" /></div>
+          <div class="form-group"><label>Job Position</label><input id="editPosition" /></div>
+          <div class="form-group"><label>Experience (Yrs)</label><input id="editExp" type="number" /></div>
+          <div class="form-group"><label>Current CTC</label><input id="editCurrentCTC" type="number" /></div>
+          <div class="form-group"><label>Expected CTC</label><input id="editExpectedCTC" type="number" /></div>
+          <div class="form-group"><label>Notice Period</label><input id="editNoticePeriod" /></div>
+          <div class="form-group"><label>Location</label><input id="editLocation" /></div>
+          <div class="form-group"><label>Current Company</label><input id="editCurrentCompany" /></div>
+          <div class="form-group"><label>Target Company</label><input id="editTargetCompany" /></div>
+          <div class="form-group">
+            <label>Candidate Status</label>
+            <select id="editStatus">
+              <option>Not Selected</option>
+              <option>Submitted</option>
+              <option>Shortlisted</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+          <div class="form-group" style="grid-column: span 2">
+            <label>Resume Link (OneDrive / Google Drive)</label>
+            <input type="url" id="editResumeLink" placeholder="https://..." />
+          </div>
+          <div class="form-group" style="grid-column: span 2">
+            <label>Comments / Notes</label>
+            <input id="editComment" />
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+          <button onclick="closeModal()" class="cancel-btn">Cancel</button>
+          <button id="saveEditBtn" onclick="saveEdit()" class="save-btn">Save Changes</button>
+        </div>
       </div>
     </div>
 
-    <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
-      <button onclick="closeModal()" class="cancel-btn">Cancel</button>
-      <button onclick="saveEdit()" class="save-btn">Save Changes</button>
+    <div id="resumeModal" class="modal" style="display: none">
+      <div class="modal-content resume-modal-content">
+        <div class="resume-header">
+          <h3>Resume Preview</h3>
+          <div style="display: flex; gap: 10px;">
+            <a id="downloadResumeBtn" href="#" target="_blank" class="save-btn" style="text-decoration: none; font-size: 0.9rem;">
+              <i class="fas fa-external-link-alt"></i> Open Link
+            </a>
+            <button onclick="closeResumeModal()" class="cancel-btn"><i class="fas fa-times"></i> Close</button>
+          </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid var(--border); margin-bottom: 15px;" />
+        <iframe id="resumeIframe" src="" class="resume-iframe"></iframe>
+      </div>
     </div>
-  </div>
-</div>
 
     <script type="module" src="app.js"></script>
   </body>
