@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  setPersistence,       
+  inMemoryPersistence 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import {
   getFirestore,
@@ -37,6 +39,10 @@ window.login = async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   try {
+    // 👈 Set persistence to "Session" (clears when tab/browser is closed)
+    await setPersistence(auth, inMemoryPersistence); 
+    
+    // Then sign in
     await signInWithEmailAndPassword(auth, email, password);
   } catch (e) {
     alert(e.message);
