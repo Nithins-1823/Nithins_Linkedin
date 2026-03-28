@@ -64,7 +64,7 @@ body {
 
 /* MAIN LAYOUT */
 .container {
-  display: block;
+  display: block; /* Changed from flex */
   height: 100vh;
   overflow: hidden;
 }
@@ -82,7 +82,7 @@ body {
 /* MAIN CONTENT AREA */
 .main {
   width: 100%;
-  max-width: 100%;
+  max-width: 100%; /* Optional: keeps content from getting too wide on ultrawides */
   margin: 0 auto;
   overflow-y: auto;
   height: 100vh;
@@ -176,6 +176,8 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
+  padding: 10px; 
+  font-size: 0.9rem;
 }
 
 /* TABLE STYLES */
@@ -199,7 +201,7 @@ body {
 
 .table-scroll-wrapper {
   overflow: auto;
-  max-height: calc(100vh - 450px);
+  max-height: calc(100vh - 450px); /* Responsive height adjustment */
 }
 
 table {
@@ -270,17 +272,18 @@ tr:hover {
   margin-top: 20px;
 }
 
+
 /* Styling for the Edit Modal Groups */
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 5px; /* Space between label and input */
 }
 
 .form-group label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #64748b;
+  color: #64748b; /* Subtle grey color */
   text-transform: uppercase;
   letter-spacing: 0.025em;
 }
@@ -312,6 +315,7 @@ tr:hover {
   cursor: pointer;
 }
 
+
 /* MOBILE */
 @media (max-width: 768px) {
   .topbar {
@@ -323,6 +327,7 @@ tr:hover {
     justify-content: center;
   }
 }
+
 
 /* ACTION BUTTONS (IN TABLE) */
 .action-btn {
@@ -336,9 +341,10 @@ tr:hover {
   justify-content: center;
   gap: 5px;
   transition: all 0.2s;
-  min-width: 32px;
+  min-width: 32px; /* For icon-only look */
 }
 
+/* Edit Button Design (Matching primary theme) */
 .edit-btn {
   background: var(--primary);
   color: white;
@@ -350,9 +356,10 @@ tr:hover {
   border-color: var(--primary-hover);
 }
 
+/* Delete Button Design */
 .delete-btn {
-  background: #fee2e2;
-  color: #ef4444;
+  background: #fee2e2; /* light red */
+  color: #ef4444;    /* dark red */
   border: 1px solid #fecaca;
 }
 
@@ -361,10 +368,10 @@ tr:hover {
   border-color: #fca5a5;
 }
 
-/* ========================================= */
-/* NEW RESUME PREVIEW STYLES                 */
-/* ========================================= */
 
+/* //////////////////////////////////////// */
+
+/* NEW RESUME BUTTON STYLES */
 .view-btn {
   background: #e0f2fe; 
   color: #0284c7; 
@@ -384,25 +391,123 @@ tr:hover {
   color: #94a3b8;
 }
 
-/* High Specificity Rule for GitHub Pages */
-.modal-content.resume-modal-content {
-  max-width: 900px !important;
-  width: 95% !important;
-  height: 85vh !important;
+/* NEW RESUME MODAL STYLES */
+.resume-modal-content {
+  max-width: 900px;
+  width: 95%;
+  height: 85vh;
   display: flex;
   flex-direction: column;
-  padding: 20px;
 }
 
 .resume-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.resume-header h3 {
-  margin: 0;
+.resume-iframe {
+  flex: 1;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.filter-select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+
+
+/* VIEW RESUME BUTTON */
+.view-btn {
+  background: #e0f2fe; 
+  color: #0284c7; 
+  border: 1px solid #bae6fd;
+}
+
+.view-btn:hover {
+  background: #bae6fd;
+  border-color: #7dd3fc;
+}
+
+.action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+/* RESUME MODAL STYLES */
+.resume-modal-content {
+  max-width: 900px;
+  width: 95%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resume-iframe {
+  flex: 1;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.filter-select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+
+/* VIEW RESUME BUTTON */
+.view-btn {
+  background: #e0f2fe; 
+  color: #0284c7; 
+  border: 1px solid #bae6fd;
+}
+
+.view-btn:hover {
+  background: #bae6fd;
+  border-color: #7dd3fc;
+}
+
+.action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #94a3b8;
+}
+
+/* RESUME MODAL STYLES */
+.resume-modal-content {
+  max-width: 900px;
+  width: 95%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .resume-iframe {
